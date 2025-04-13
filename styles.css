@@ -1,0 +1,38 @@
+/* styles for calculator */
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+.calculator {
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+	height: 600px;
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+}
+
+.display {
+	border-style: solid;
+	border-width: 2px;
+	height: 100px;
+	margin: 10px;
+	justify-self: flex-start;
+}
+
+.buttons {
+	display: flex;
+	margin: 10px;
+	gap: 5px;
+
+}
+
+
+button {
+	height: 110px;
+	width: 110px;
+	font-size: 24px;
+}
