@@ -1,5 +1,7 @@
 /* styles for calculator */
 
+
+
 .container {
 	display: flex;
 	justify-content: center;
@@ -9,24 +11,46 @@
 	border-style: solid;
 	border-color: black;
 	border-width: 3px;
-	height: 600px;
+	border-radius: 5px;
+	height: 720px;
 	width: 500px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-content: center;
 }
 
 .display {
 	border-style: solid;
 	border-width: 2px;
+	border-color: black;
+	border-radius: 5px;
 	height: 100px;
+	width: 450px;
 	margin: 10px;
-	justify-self: flex-start;
+	display: flex;
+	justify-content: right;
+	align-self: center;
+	
 }
 
-.buttons {
+#display-content {
+	font-size: 75px;
+	margin: 5px;
+}
+
+.button-container {
 	display: flex;
-	margin: 10px;
+	flex-direction: column;
+	margin: 15px;
 	gap: 5px;
+	align-self: center;
+}
+
+.row {
+	display: flex;
+	gap: 5px;
+	align-self: flex-end;
 
 }
 
@@ -34,5 +58,6 @@
 button {
 	height: 110px;
 	width: 110px;
-	font-size: 24px;
+	font-size: 28px;
+	border-radius: 10px;
 }
