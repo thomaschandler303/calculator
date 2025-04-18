@@ -69,7 +69,9 @@ let inputStream = {
 }
 
 equal.addEventListener("click", () => {
+	console.log(inputStream)
 	if (inputStream.num1 && inputStream.operand && inputStream.num2) {
+		console.log(inputStream)
 		inputStream.num2 = +(display.textContent)
 		operate(inputStream.operand, inputStream.num1, inputStream.num2)
 		inputStream.num2 = null
@@ -83,9 +85,10 @@ equal.addEventListener("click", () => {
 add.addEventListener("click", () => {
 
 	// first instance of operator in queue
-	if (inputStream.num1 === null && !(display.textContent === "0")) {
+	if (inputStream.num1 && !(display.textContent === "0") && !(inputStream.operand)) {
 		inputStream.num1 = +(display.textContent);
 		inputStream.operand = "+"
+		console.log(inputStream)
 	}
 	// second instance of operator in queue
 	// perform operation first
@@ -102,17 +105,14 @@ add.addEventListener("click", () => {
 		
 	}
 
-	// instance of operator on number displayed after equal
-	if (inputStream.num1 && !(inputStream.operand)) {
-		inputStream.operand = "+"
-	}
+	
 	
 })
 
 subtract.addEventListener("click", () => {
 
 	// first operator in queue
-	if (inputStream.num1 === null && !(display.textContent === "0")) {
+	if (inputStream.num1 && !(display.textContent === "0")) {
 		inputStream.num1 = +(display.textContent)
 		inputStream.operand = "-"
 	}
@@ -140,7 +140,7 @@ subtract.addEventListener("click", () => {
 multiply.addEventListener("click", () => {
 
 	// first operator in queue
-	if (inputStream.num1 === null && !(display.textContent === "0")) {
+	if (inputStream.num1 && !(display.textContent === "0")) {
 		inputStream.num1 = +(display.textContent)
 		inputStream.operand = "*"
 	}
@@ -158,17 +158,14 @@ multiply.addEventListener("click", () => {
 		}
 		
 	}
-	// instance of operator on number displayed after equal
-	if (inputStream.num1 && !(inputStream.operand)) {
-		inputStream.operand = "*"
-	}
+	
 
 })
 
 divide.addEventListener("click", () => {
 
 	// first operator in queue
-	if (inputStream.num1 === null && !(display.textContent === "0")) {
+	if (inputStream.num1 && !(display.textContent === "0")) {
 		inputStream.num1 = +(display.textContent)
 		inputStream.operand = "/"
 	}
@@ -187,10 +184,7 @@ divide.addEventListener("click", () => {
 		
 		
 	}
-	// instance of operator on number displayed after equal
-	if (inputStream.num1 && !(inputStream.operand)) {
-		inputStream.operand = "/"
-	}
+	
 
 })
 
@@ -222,7 +216,7 @@ decimal.addEventListener("click", () => {
 	else if (inputStream.num1 && inputStream.operand && !(inputStream.num2)) {
 		display.textContent = "0"
 		display.textContent = display.textContent + decimal.textContent
-		inputStream.num2 = "x"
+		
 	}
 	else if (inputStream.num1 && inputStream.operand && inputStream.num2) {
 		display.textContent = display.textContent + decimal.textContent
@@ -243,19 +237,31 @@ digits.forEach((digit) => {
 
 		// first number entered
 		if (!(inputStream.num1) && display.textContent === "0") {
-			display.textContent = digit.textContent
 
+			display.textContent = digit.textContent
+			inputStream.num1 = display.textContent
+		}
+		// for first number with leading decimal
+		else if (!(inputStream.num1) && (display.textContent.includes("."))) {
+			display.textContent = display.textContent + digit.textContent
+			inputStream.num1 = display.textContent
 		}
 
 		// ready for second number and subsequent numbers after operand entered
-		else if (inputStream.operand && !(inputStream.num2)) {
+		else if (inputStream.operand && !(inputStream.num2) && !(display.textContent.includes("."))) {
 			display.textContent = digit.textContent
-			inputStream.num2 = "x"
+			inputStream.num2 = display.textContent
+		}
+		// for second number with leading decimal
+		else if (inputStream.operand && !(inputStream.num2) && (display.textContent.includes("."))) {
+			display.textContent = display.textContent + digit.textContent
+			inputStream.num2 = display.textContent
 		}
 
 		// instance after equals run and object values reset to null or division error
 		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes("."))) {
 			display.textContent = digit.textContent
+			inputStream.num1 = display.textContent
 		}
 
 		// continue entering digits for current number in display
