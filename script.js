@@ -218,6 +218,7 @@ digits.forEach((digit) => {
 		// first number entered
 		if (!(inputStream.num1) && display.textContent === "0") {
 			display.textContent = digit.textContent
+
 		}
 
 		// ready for second number and subsequent numbers after operand entered
@@ -227,7 +228,7 @@ digits.forEach((digit) => {
 		}
 
 		// instance after equals run and object values reset to null
-		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes("."))) {
+		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes(".")) && display.textContent === "0") {
 			display.textContent = digit.textContent
 		}
 

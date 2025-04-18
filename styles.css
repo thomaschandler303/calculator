@@ -61,3 +61,11 @@ button {
 	font-size: 28px;
 	border-radius: 10px;
 }
+
+button:hover {
+	background-color: aqua;
+}
+
+button:active {
+	background-color: royalblue;
+}
