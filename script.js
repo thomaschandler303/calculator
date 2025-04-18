@@ -33,7 +33,7 @@ function operate(operand, number1, number2) {
 	if (operand === "*") {
 		display.textContent = multiplication(number1, number2)
 	}
-	if (operand === "/") {
+	if (operand === "/" || operand === "\\") {
 		if (number2 === 0) {
 			display.textContent = "DivZeroErr"
 			inputStream.num1 = null
