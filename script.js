@@ -69,6 +69,7 @@ equal.addEventListener("click", () => {
 		inputStream.num2 = null
 		inputStream.num1 = null
 		inputStream.operand = null
+
 		
 	}
 })
@@ -181,9 +182,13 @@ backspace.addEventListener("click", () => {
 })
 
 decimal.addEventListener("click", () => {
-
+	// instance for initial decimal after equals has run and values reset
+	if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2)) {
+		display.textContent = "0" + decimal.textContent
+		console.log("decimal inserted")
+	}
 	// decimal for first number
-	if (!(display.textContent.includes(".")) && !(inputStream.num1)) {
+	else if (!(display.textContent.includes(".")) && !(inputStream.num1)) {
 		display.textContent = display.textContent + decimal.textContent
 	}
 
@@ -221,7 +226,10 @@ digits.forEach((digit) => {
 			inputStream.num2 = "x"
 		}
 
-
+		// instance after equals run and object values reset to null
+		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes("."))) {
+			display.textContent = digit.textContent
+		}
 
 		// continue entering digits for current number in display
 		else {
