@@ -1,7 +1,5 @@
 // script for calculator
 
-
-
 function addition(number1, number2) {
 	return number1 + number2
 }
@@ -55,8 +53,6 @@ function updateDisplay() {
 
 let display = document.querySelector("#display-content")
 display.textContent = "0"
-
-
 
 const digits = document.querySelectorAll(".digit")
 const clear = document.querySelector("#clear")
