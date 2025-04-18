@@ -1,5 +1,7 @@
 // script for calculator
 
+
+
 function addition(number1, number2) {
 	return number1 + number2
 }
@@ -35,6 +37,8 @@ function operate(operand, number1, number2) {
 			inputStream.num1 = null
 			inputStream.operand = null
 			inputStream.num2 = null
+
+			throw new Error("No / 0!")
 		}
 		else {
 			display.textContent = division(number1, number2)
@@ -45,6 +49,8 @@ function operate(operand, number1, number2) {
 
 let display = document.querySelector("#display-content")
 display.textContent = "0"
+
+
 
 const digits = document.querySelectorAll(".digit")
 const currentDisplay = "";
@@ -85,10 +91,14 @@ add.addEventListener("click", () => {
 	// perform operation first
 	if (inputStream.num1 && inputStream.operand && inputStream.num2) {
 		inputStream.num2 = +(display.textContent)
-		operate(inputStream.operand, inputStream.num1, inputStream.num2)
-		inputStream.num2 = null
-		inputStream.num1 = +(display.textContent)
-		inputStream.operand = "+"
+		try {
+			operate(inputStream.operand, inputStream.num1, inputStream.num2)
+			inputStream.num2 = null
+			inputStream.num1 = +(display.textContent)
+			inputStream.operand = "+"
+		} catch (e) {
+			display.textContent = e;
+		}
 		
 	}
 
@@ -110,10 +120,16 @@ subtract.addEventListener("click", () => {
 	// second or higher instance of operator in queue
 	if (inputStream.num1 && inputStream.operand && inputStream.num2) {
 		inputStream.num2 = +(display.textContent)
-		operate(inputStream.operand, inputStream.num1, inputStream.num2)
-		inputStream.num2 = null
-		inputStream.num1 = +(display.textContent)
-		inputStream.operand = "-"
+		try {
+			operate(inputStream.operand, inputStream.num1, inputStream.num2)
+			inputStream.num2 = null
+			inputStream.num1 = +(display.textContent)
+			inputStream.operand = "-"
+		} catch (e) {
+			display.textContent = e
+
+		}
+		
 	}
 	// instance of operator on number displayed after equal
 	if (inputStream.num1 && !(inputStream.operand)) {
@@ -132,10 +148,15 @@ multiply.addEventListener("click", () => {
 	// second or higher instance of operator in queue
 	if (inputStream.num1 && inputStream.operand && inputStream.num2) {
 		inputStream.num2 = +(display.textContent)
-		operate(inputStream.operand, inputStream.num1, inputStream.num2)
-		inputStream.num2 = null
-		inputStream.num1 = +(display.textContent)
-		inputStream.operand = "*"
+		try {
+			operate(inputStream.operand, inputStream.num1, inputStream.num2)
+			inputStream.num2 = null
+			inputStream.num1 = +(display.textContent)
+			inputStream.operand = "*"
+		} catch (e) {
+			display.textContent = e
+		}
+		
 	}
 	// instance of operator on number displayed after equal
 	if (inputStream.num1 && !(inputStream.operand)) {
@@ -155,10 +176,15 @@ divide.addEventListener("click", () => {
 	// second or higher instance of operator in queue
 	else if (inputStream.num1 && inputStream.operand && inputStream.num2) {
 		inputStream.num2 = +(display.textContent)
-		operate(inputStream.operand, inputStream.num1, inputStream.num2)
-		inputStream.num2 = null
-		inputStream.num1 = +(display.textContent)
-		inputStream.operand = "/"
+		try {
+			operate(inputStream.operand, inputStream.num1, inputStream.num2)
+			inputStream.num2 = null
+			inputStream.num1 = +(display.textContent)
+			inputStream.operand = "/"
+		} catch (e) {
+			display.textContent = e
+		}
+		
 		
 	}
 	// instance of operator on number displayed after equal
@@ -227,8 +253,8 @@ digits.forEach((digit) => {
 			inputStream.num2 = "x"
 		}
 
-		// instance after equals run and object values reset to null
-		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes(".")) && display.textContent === "0") {
+		// instance after equals run and object values reset to null or division error
+		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2) && !(display.textContent.includes("."))) {
 			display.textContent = digit.textContent
 		}
 
@@ -239,3 +265,4 @@ digits.forEach((digit) => {
 		}
 	})
 })
+
