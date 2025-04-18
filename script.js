@@ -137,24 +137,34 @@ backspace.addEventListener("click", () => {
 
 decimal.addEventListener("click", () => {
 	// instance for initial decimal after equals has run and values reset
-	if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2)) {
+	if (inputStream.num1 === null && !(inputStream.operand) && !(inputStream.num2)) {
 		display.textContent = "0" + decimal.textContent
 		console.log("decimal inserted")
 	}
-	// decimal for first number
-	else if (!(display.textContent.includes(".")) && !(inputStream.num1)) {
+	// leading decimal for first number at 0
+	else if (!(display.textContent.includes(".")) && inputStream.num1 === null) {
+		display.textContent = display.textContent + decimal.textContent
+	}
+
+	// decimal for first number after digit entered
+	else if (!(display.textContent.includes(".")) && !(inputStream.num1 === null) && inputStream.operand === null) {
 		display.textContent = display.textContent + decimal.textContent
 	}
 
 	// decimal for start of second number
-	else if (inputStream.num1 && inputStream.operand && !(inputStream.num2)) {
+	else if (inputStream.num1 && inputStream.operand && inputStream.num2 === null) {
 		display.textContent = "0"
 		display.textContent = display.textContent + decimal.textContent
 		
 	}
-	else if (inputStream.num1 && inputStream.operand && inputStream.num2) {
+
+	// decimal for second number after digit entered
+	else if (inputStream.num1 && inputStream.operand && !(inputStream.num2 === null) && !(display.textContent.includes("."))) {
+		console.log("here?")
 		display.textContent = display.textContent + decimal.textContent
 	}
+
+	
 	
 })
 
@@ -170,7 +180,7 @@ digits.forEach((digit) => {
 		
 
 
-		// first number entered
+		// first digit entered at 0
 		if (inputStream.num1 === null && display.textContent === "0") {
 			console.log("first number entered")
 			display.textContent = digit.textContent
@@ -181,19 +191,26 @@ digits.forEach((digit) => {
 			display.textContent = display.textContent + digit.textContent
 			inputStream.num1 = display.textContent
 		}
-
-		// ready for second number and subsequent numbers after operand entered
+		// for second number with leading decimal
+		else if (inputStream.operand && inputStream.num2 === null && display.textContent === "0.") {
+			display.textContent = display.textContent + digit.textContent
+			inputStream.num2 = display.textContent
+		}
+		// first digit of second number without leading decimal but decimal in display
+		else if (inputStream.operand && inputStream.num2 === null && display.textContent.includes(".")) {
+			display.textContent = digit.textContent
+			inputStream.num2 = display.textContent
+		}
+		
+		// ready for second number and subsequent numbers after operand entered without leading decimal
 		else if (inputStream.operand && !(inputStream.num2) && !(display.textContent.includes("."))) {
 			console.log("second number entered")
 			display.textContent = digit.textContent
 			inputStream.num2 = display.textContent
 			console.log(inputStream)
 		}
-		// for second number with leading decimal
-		else if (inputStream.operand && !(inputStream.num2) && (display.textContent.includes("."))) {
-			display.textContent = display.textContent + digit.textContent
-			inputStream.num2 = display.textContent
-		}
+		
+		
 
 		// instance after equals run and object values reset to null or division error
 		else if (!(inputStream.num1) && !(inputStream.operand) && !(inputStream.num2)) {
@@ -203,7 +220,6 @@ digits.forEach((digit) => {
 
 		// continue entering digits for current number in display
 		else {
-
 			display.textContent = display.textContent + digit.textContent
 			
 		}
