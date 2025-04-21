@@ -10,6 +10,7 @@
 .calculator {
 	border-style: solid;
 	border-color: black;
+	background-color: slategray;
 	border-width: 3px;
 	border-radius: 5px;
 	height: 720px;
@@ -25,6 +26,7 @@
 	border-width: 2px;
 	border-color: black;
 	border-radius: 5px;
+	background-color: lightblue;
 	height: 100px;
 	width: 450px;
 	margin: 10px;
@@ -60,10 +62,11 @@ button {
 	width: 110px;
 	font-size: 28px;
 	border-radius: 10px;
+	background-color: navajowhite;
 }
 
 button:hover {
-	background-color: aqua;
+	background-color: mediumaquamarine;
 }
 
 button:active {

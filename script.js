@@ -47,7 +47,9 @@ function operate(operand, number1, number2) {
 }
 
 function updateDisplay() {
-
+	// take arguments from input and operation output here and update the display.
+	// also write a conditional to check if the display is going to overflow and shorten it either by rounding
+	// a decimaled number or scientific notation
 }
 
 let display = document.querySelector("#display-content")
